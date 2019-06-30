@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+<script type="text/javascript" src="ui/jquery.min.js"></script>
+<script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/jquery.serializejson.min.js"></script>
+<script type="text/javascript" src="js/date.js"></script>
+<script type="text/javascript" src="js/crud.js"></script>
+<script type="text/javascript">
+	columns = [[    
+ 	        {field:'id',title:'id',width:100},   
+ 	        {field:'name',title:'商品名',width:100,align:'right'},   
+ 	        {field:'origin',title:'产地',width:100,align:'right'},   
+ 	        {field:'producer',title:'生产商',width:100,align:'right'},   
+ 	        {field:'unit',title:'计量单位',width:100,align:'right'},   
+ 	        {field:'inprice',title:'进价',width:100,align:'right'},   
+ 	        {field:'outprice',title:'出价',width:100,align:'right'},   
+ 	        {field:'goodstype',title:'类型名称',width:100,align:'right',formatter:function(value){
+				return value.name;
+			}}
+ 	    ]];
+	
+	methodName = 'goods';
+	
+	width = 260;
+	height = 270;
+	
+</script>
+
+</head>
+<body>
+	<form id="searchForm">
+		商品名：<input type="text" name="name">
+		&nbsp;&nbsp;
+		产地：<input type="text" name="origin">
+		&nbsp;&nbsp;
+		厂家：<input type="text" name="producer">
+		&nbsp;&nbsp;
+		计量单位：<input type="text" name="unit">
+		&nbsp;&nbsp;
+		商品类型：<input class="easyui-combobox" name="goodstypeid"   
+   					 		data-options="valueField:'id',textField:'name',url:'goodstype_all'" />
+   		&nbsp;&nbsp;
+   		<input type="button" value="查询" id="submitSearch">
+	</form>
+	<br>
+	<table id="dg"></table>
+ 	<div id="dd" class="easyui-dialog">	
+ 		<form id='myForm'>
+ 			<input type="hidden" name="id">
+ 			<table>
+ 				<tr>
+ 					<td>商品名: </td>
+ 					<td>
+ 						<input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+ 					</td>
+ 				</tr>
+ 				<tr>
+ 					<td>产地: </td>
+ 					<td>
+ 						<input class="easyui-validatebox" type="text" name="origin" data-options="required:true" />
+ 					</td>
+ 				</tr>
+ 				<tr>
+ 					<td>厂家: </td>
+ 					<td>
+ 						<input type="text" name="producer" />
+ 					</td>
+ 				</tr>
+ 				<tr>
+ 					<td>计量单位: </td>
+ 					<td>
+ 						<input type="text" name="unit" />
+ 					</td>
+ 				</tr>
+ 				<tr>
+ 					<td>进价: </td>
+ 					<td>
+ 						<input type="text" class="easyui-numberbox" name="inprice" data-options="min:0,precision:2"/>
+ 					</td>
+ 				</tr>
+ 				<tr>
+ 					<td>出价: </td>
+ 					<td>
+ 						<input type="text" class="easyui-numberbox" name="outprice" data-options="min:0,precision:2"/>
+ 					</td>
+ 				</tr>
+ 				<tr>
+ 					<td>商品类型: </td>
+ 					<td>
+ 						<input class="easyui-combobox" name="goodstypeid"   
+   					 		data-options="valueField:'id',textField:'name',url:'goodstype_all'" />
+ 					</td>
+ 				</tr>
+ 				<tr>
+ 					<td>
+ 						<input type="button" value="保存" id="submitForm">
+ 					</td>
+ 				</tr>
+ 			</table> 			
+ 		</form>
+ 	</div>
+</body>
+</html>

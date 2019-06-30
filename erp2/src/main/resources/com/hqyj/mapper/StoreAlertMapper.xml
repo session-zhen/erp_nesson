@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqyj.mapper.StoreAlertMapper">
+
+	<select id="getStoreAlerts" parameterType="com.hqyj.pojo.StoreAlert"
+		resultType="com.hqyj.pojo.StoreAlert">
+		SELECT a.id,a.name,a.storenum,b.outnum FROM (
+		SELECT g.id,g.name,IFNULL(sum(s.num),0) storenum FROM goods g left JOIN 
+		storedetail s on g.id=s.goodsid GROUP BY g.id,g.name
+		) a, (
+		SELECT od.goodsid,sum(od.num) outnum FROM orderdetail od,orders o WHERE 
+		od.ORDERSID=o.ID AND o.TYPE='2' AND od.STATE='0' GROUP BY od.GOODSID
+		) b 
+		WHERE a.id=b.goodsid
+	</select>
+
+</mapper>

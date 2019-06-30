@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+<script type="text/javascript" src="ui/jquery.min.js"></script>
+<script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/jquery.serializejson.min.js"></script>
+<script type="text/javascript" src="js/date.js"></script>
+<script type="text/javascript" src="js/crud.js"></script>
+<script type="text/javascript">
+	columns = [[    
+	     {field:'id',title:'id',width:100},  
+	     {field:'name',title:'商品类型',width:100,align:'right'},
+	 ]];
+	
+	methodName = 'goodstype';
+	
+	width = 260;
+	height = 170;
+</script>
+</head>
+<body>
+	<form id="searchForm">
+		类型名称：<input type="text" name="name">
+		&nbsp;&nbsp;&nbsp;&nbsp;
+   		<input type="button" value="查询" id="submitSearch">
+	</form>
+	<br>
+	<table id="dg"></table>
+ 	<div id="dd" class="easyui-dialog">	
+ 		<form id='myForm'>
+ 			<input type="hidden" name="id">
+ 			<table>
+ 				<tr>
+ 					<td>类型名称: </td>
+ 					<td>
+ 						<input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+ 					</td>
+ 				</tr>
+ 				<tr>
+ 					<td>
+ 						<input type="button" value="保存" id="submitForm">
+ 					</td>
+ 				</tr>
+ 			</table> 			
+ 		</form>
+ 	</div>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqyj.mapper.InventoryMapper">
+  <resultMap id="BaseResultMap" type="com.hqyj.pojo.Inventory">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="GOODSID" jdbcType="INTEGER" property="goodsid" />
+    <result column="STOREID" jdbcType="INTEGER" property="storeid" />
+    <result column="NUM" jdbcType="INTEGER" property="num" />
+    <result column="TYPE" jdbcType="VARCHAR" property="type" />
+    <result column="CREATETIME" jdbcType="DATE" property="createtime" />
+    <result column="CHECKTIME" jdbcType="DATE" property="checktime" />
+    <result column="CREATER" jdbcType="INTEGER" property="creater" />
+    <result column="CHECKER" jdbcType="INTEGER" property="checker" />
+    <result column="STATE" jdbcType="VARCHAR" property="state" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, GOODSID, STOREID, NUM, TYPE, CREATETIME, CHECKTIME, CREATER, CHECKER, STATE, 
+    REMARK
+  </sql>
+  <select id="selectByExample" parameterType="com.hqyj.pojo.InventoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from inventory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from inventory
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from inventory
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hqyj.pojo.InventoryExample">
+    delete from inventory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hqyj.pojo.Inventory">
+    insert into inventory (ID, GOODSID, STOREID, 
+      NUM, TYPE, CREATETIME, 
+      CHECKTIME, CREATER, CHECKER, 
+      STATE, REMARK)
+    values (#{id,jdbcType=INTEGER}, #{goodsid,jdbcType=INTEGER}, #{storeid,jdbcType=INTEGER}, 
+      #{num,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{createtime,jdbcType=DATE}, 
+      #{checktime,jdbcType=DATE}, #{creater,jdbcType=INTEGER}, #{checker,jdbcType=INTEGER}, 
+      #{state,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hqyj.pojo.Inventory">
+    insert into inventory
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="goodsid != null">
+        GOODSID,
+      </if>
+      <if test="storeid != null">
+        STOREID,
+      </if>
+      <if test="num != null">
+        NUM,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="createtime != null">
+        CREATETIME,
+      </if>
+      <if test="checktime != null">
+        CHECKTIME,
+      </if>
+      <if test="creater != null">
+        CREATER,
+      </if>
+      <if test="checker != null">
+        CHECKER,
+      </if>
+      <if test="state != null">
+        STATE,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null">
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="storeid != null">
+        #{storeid,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="checktime != null">
+        #{checktime,jdbcType=DATE},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=INTEGER},
+      </if>
+      <if test="checker != null">
+        #{checker,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hqyj.pojo.InventoryExample" resultType="java.lang.Long">
+    select count(*) from inventory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update inventory
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsid != null">
+        GOODSID = #{record.goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.storeid != null">
+        STOREID = #{record.storeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.num != null">
+        NUM = #{record.num,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null">
+        TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        CREATETIME = #{record.createtime,jdbcType=DATE},
+      </if>
+      <if test="record.checktime != null">
+        CHECKTIME = #{record.checktime,jdbcType=DATE},
+      </if>
+      <if test="record.creater != null">
+        CREATER = #{record.creater,jdbcType=INTEGER},
+      </if>
+      <if test="record.checker != null">
+        CHECKER = #{record.checker,jdbcType=INTEGER},
+      </if>
+      <if test="record.state != null">
+        STATE = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update inventory
+    set ID = #{record.id,jdbcType=INTEGER},
+      GOODSID = #{record.goodsid,jdbcType=INTEGER},
+      STOREID = #{record.storeid,jdbcType=INTEGER},
+      NUM = #{record.num,jdbcType=INTEGER},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      CREATETIME = #{record.createtime,jdbcType=DATE},
+      CHECKTIME = #{record.checktime,jdbcType=DATE},
+      CREATER = #{record.creater,jdbcType=INTEGER},
+      CHECKER = #{record.checker,jdbcType=INTEGER},
+      STATE = #{record.state,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hqyj.pojo.Inventory">
+    update inventory
+    <set>
+      <if test="goodsid != null">
+        GOODSID = #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="storeid != null">
+        STOREID = #{storeid,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        NUM = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        CREATETIME = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="checktime != null">
+        CHECKTIME = #{checktime,jdbcType=DATE},
+      </if>
+      <if test="creater != null">
+        CREATER = #{creater,jdbcType=INTEGER},
+      </if>
+      <if test="checker != null">
+        CHECKER = #{checker,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hqyj.pojo.Inventory">
+    update inventory
+    set GOODSID = #{goodsid,jdbcType=INTEGER},
+      STOREID = #{storeid,jdbcType=INTEGER},
+      NUM = #{num,jdbcType=INTEGER},
+      TYPE = #{type,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=DATE},
+      CHECKTIME = #{checktime,jdbcType=DATE},
+      CREATER = #{creater,jdbcType=INTEGER},
+      CHECKER = #{checker,jdbcType=INTEGER},
+      STATE = #{state,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

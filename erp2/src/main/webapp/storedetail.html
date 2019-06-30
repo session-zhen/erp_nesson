@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+<script type="text/javascript" src="ui/jquery.min.js"></script>
+<script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/jquery.serializejson.min.js"></script>
+<script type="text/javascript" src="js/date.js"></script>
+<script type="text/javascript" src="js/storedetail.js"></script>
+<script type="text/javascript">
+	columns = [[    
+	     {field:'id',title:'id',width:100},  
+	     {field:'storeName',title:'仓库',width:100,align:'right'},  
+	     {field:'goodsName',title:'商品',width:100,align:'right'},
+	     {field:'num',title:'数量',width:100,align:'right'}
+	 ]];
+	
+	methodName = 'storedetail';
+	
+	width = 260;
+	height = 170;
+</script>
+</head>
+<body>
+	<form id="searchForm">
+		仓库：<input class="easyui-combobox" name="storeid"   
+   					 		data-options="valueField:'id',textField:'name',url:'store_all'" />
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		商品：<input class="easyui-combobox" name="goodsid"   
+   					 		data-options="valueField:'id',textField:'name',url:'goods_all'" />
+		&nbsp;&nbsp;&nbsp;&nbsp;
+   		<input type="button" value="查询" id="submitSearch">
+	</form>
+	<br>
+	<table id="dg"></table>
+</body>
+</html>

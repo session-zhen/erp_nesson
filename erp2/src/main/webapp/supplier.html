@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+<script type="text/javascript" src="ui/jquery.min.js"></script>
+<script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/jquery.serializejson.min.js"></script>
+<script type="text/javascript" src="js/date.js"></script>
+<script type="text/javascript" src="js/request.js"></script>
+<script type="text/javascript" src="js/crud.js"></script>
+<script type="text/javascript">
+
+	if(Request['type'] == 1) {
+		listParam = '?type=1';
+	}
+	if(Request['type'] == 2) {
+		listParam = '?type=2';
+	}
+
+	columns = [[    
+ 	        {field:'id',title:'id',width:100},    
+ 	        {field:'name',title:'厂商',width:100},    
+ 	        {field:'address',title:'地址',width:100,align:'right'},   
+ 	        {field:'contact',title:'联系人',width:100,align:'right'},
+ 	        {field:'tele',title:'电话',width:100,align:'right'},   
+ 	        {field:'email',title:'邮箱',width:150,align:'right'}
+ 	    ]];
+	
+	methodName = 'supplier';
+	
+	width = 260;
+	height = 270;
+	
+</script>
+
+</head>
+<body>
+	<form id="searchForm">
+		厂商：<input type="text" name="name">
+		&nbsp;&nbsp;
+		地址：<input type="text" name="address">
+		&nbsp;&nbsp;
+		联系人：<input type="text" name="contact">
+		&nbsp;&nbsp;
+		邮箱：<input type="text" name="email">
+		&nbsp;&nbsp;
+		电话：<input type="text" name="tele">
+		&nbsp;&nbsp;
+   		<input type="button" value="查询" id="submitSearch">
+	</form>
+	<br>
+	<table id="dg"></table>
+ 	<div id="dd" class="easyui-dialog">	
+ 		<form id='myForm'>
+ 			<input type="hidden" name="id">
+ 			<table>
+ 				<tr>
+ 					<td>厂商: </td>
+ 					<td>
+ 						<input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+ 					</td>
+ 				</tr>
+ 				<tr>
+ 					<td>地址: </td>
+ 					<td>
+ 						<input type="text" name="address" />
+ 					</td>
+ 				</tr>
+ 				<tr>
+ 					<td>联系人: </td>
+ 					<td>
+ 						<input class="easyui-validatebox" type="text" name="contact" data-options="required:true" />
+ 					</td>
+ 				</tr>
+ 				<tr>
+ 					<td>邮箱: </td>
+ 					<td>
+ 						<input class="easyui-validatebox" type="text" name="email" data-options="required:true,validType:'email'"/>
+ 					</td>
+ 				</tr>
+ 				<tr>
+ 					<td>电话: </td>
+ 					<td>
+ 						<input type="text" name="tele" />
+ 					</td>
+ 				</tr>
+ 				<tr>
+ 					<td>
+ 						<input type="button" value="保存" id="submitForm">
+ 					</td>
+ 				</tr>
+ 			</table> 			
+ 		</form>
+ 	</div>
+</body>
+</html>

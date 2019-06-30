@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqyj.mapper.ReportMapper">
+
+	<select id="getReportList" parameterType="com.hqyj.pojo.Report" resultType="com.hqyj.pojo.Report">
+		SELECT gt.`NAME`,sum(od.MONEY) total from goodstype gt,goods gs,orders os,orderdetail od 
+		where gt.ID = gs.GOODSTYPEID and os.id = od.ORDERSID 
+		and od.GOODSID = gs.ID and os.TYPE = '2' 
+			<if test="startTime != null and startTime != ''">
+				and os.CREATETIME >= #{startTime}
+			</if>
+			<if test="endTime != null and endTime != ''">
+				and os.CREATETIME <![CDATA[ <= ]]> #{endTime}
+			</if>
+		GROUP BY gt.`NAME`
+	</select>
+
+</mapper>

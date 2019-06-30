@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+<script type="text/javascript" src="ui/jquery.min.js"></script>
+<script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/jquery.serializejson.min.js"></script>
+<script type="text/javascript" src="js/date.js"></script>
+<script type="text/javascript" src="js/storeoper.js"></script>
+<script type="text/javascript">
+	columns = [[    
+		 {field:'id',title:'id',width:100},
+		 {field:'empName',title:'操作员工',width:100,align:'right'},
+		 {field:'opertime',title:'操作时间',width:100,align:'right'},
+	     {field:'storeName',title:'仓库',width:100,align:'right'},  
+	     {field:'goodsName',title:'商品',width:100,align:'right'},
+	     {field:'num',title:'数量',width:100,align:'right'},
+	     {field:'type',title:'类型',width:100,align:'right',formatter:function(value){
+			 if(value==1){
+				 return '入库';
+			 }
+			 if(value==2){
+				 return '出库';
+			 }
+		 }},
+	 ]];
+	
+	methodName = 'storeoper';
+	
+	width = 260;
+	height = 170;
+</script>
+</head>
+<body>
+	<form id="searchForm">
+		操作员工：<input class="easyui-combobox" name="empid"   
+   					 		data-options="valueField:'id',textField:'name',url:'emp_all'" />
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		操作时间：<input type="text" name="startTime" class="easyui-datebox" />
+		至：<input type="text" name="endTime" class="easyui-datebox" /> 
+		<br>
+		仓库：<input class="easyui-combobox" name="storeid"   
+   					 		data-options="valueField:'id',textField:'name',url:'store_all'" />
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		商品：<input class="easyui-combobox" name="goodsid"   
+   					 		data-options="valueField:'id',textField:'name',url:'goods_all'" />
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		类型：<input class="easyui-combobox" name="type"   
+   					 		data-options="valueField:'id',textField:'name',data:[{id:'',name:'所有'},{id:'1',name:'入库'},{id:'',name:'出库'}]" />
+		&nbsp;&nbsp;&nbsp;&nbsp;
+   		<input type="button" value="查询" id="submitSearch">
+	</form>
+	<br>
+	<table id="dg"></table>
+</body>
+</html>

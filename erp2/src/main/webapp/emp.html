@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+<script type="text/javascript" src="ui/jquery.min.js"></script>
+<script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="js/jquery.serializejson.min.js"></script>
+<script type="text/javascript" src="js/date.js"></script>
+<script type="text/javascript" src="js/crud.js"></script>
+<script type="text/javascript">
+	columns = [[    
+ 	        {field:'id',title:'id',width:100},    
+ 	        {field:'username',title:'登录名',width:100},    
+ 	        {field:'name',title:'用户名',width:100,align:'right'},   
+ 	        {field:'gender',title:'性别',width:100,align:'right'},   
+ 	        {field:'email',title:'邮箱',width:100,align:'right'},   
+ 	        {field:'tele',title:'电话',width:100,align:'right'},   
+ 	        {field:'address',title:'住址',width:100,align:'right'},   
+ 	        {field:'birthday',title:'生日',width:100,align:'right'},   
+ 	        {field:'dep',title:'部门名称',width:100,align:'right',formatter:function(value){
+				return value.name;
+			}}
+ 	    ]];
+	
+	methodName = 'emp';
+	
+	width = 260;
+	height = 270;
+	
+</script>
+
+</head>
+<body>
+	<form id="searchForm">
+		登录名：<input type="text" name="username">
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		性别：<input type="radio" name="gender" value="男" data-options="required:true" />男
+		    <input type="radio" name="gender" value="女" data-options="required:true" />女
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		部门：<input class="easyui-combobox" name="depid"   
+   					 		data-options="valueField:'id',textField:'name',url:'dep_all'" />
+   		&nbsp;&nbsp;&nbsp;&nbsp;
+   		<input type="button" value="查询" id="submitSearch">
+	</form>
+	<br>
+	<table id="dg"></table>
+ 	<div id="dd" class="easyui-dialog">	
+ 		<form id='myForm'>
+ 			<input type="hidden" name="id">
+ 			<table>
+ 				<tr>
+ 					<td>登录名: </td>
+ 					<td>
+ 						<input class="easyui-validatebox" type="text" name="username" data-options="required:true" />
+ 					</td>
+ 				</tr>
+ 				<tr>
+ 					<td>用户名: </td>
+ 					<td>
+ 						<input class="easyui-validatebox" type="text" name="name" data-options="required:true" />
+ 					</td>
+ 				</tr>
+ 				<tr>
+ 					<td>性别: </td>
+ 					<td>
+ 						<input type="radio" name="gender" value="男" data-options="required:true" />男
+		        		<input type="radio" name="gender" value="女" data-options="required:true" />女
+ 					</td>
+ 				</tr>
+ 				<tr>
+ 					<td>邮箱: </td>
+ 					<td>
+ 						<input class="easyui-validatebox" type="text" name="email" data-options="required:true,validType:'email'"/>
+ 					</td>
+ 				</tr>
+ 				<tr>
+ 					<td>电话: </td>
+ 					<td>
+ 						<input type="text" name="tele" />
+ 					</td>
+ 				</tr>
+ 				<tr>
+ 					<td>地址: </td>
+ 					<td>
+ 						<input type="text" name="address" />
+ 					</td>
+ 				</tr>
+ 				<tr>
+ 					<td>生日: </td>
+ 					<td>
+ 						<input type="text" name="birthday" class="easyui-datebox" editable="false"/> 
+ 					</td>
+ 				</tr>
+ 				<tr>
+ 					<td>部门: </td>
+ 					<td>
+ 						<input class="easyui-combobox" name="depid"   
+   					 		data-options="valueField:'id',textField:'name',url:'dep_all'" />
+ 					</td>
+ 				</tr>
+ 				<tr>
+ 					<td>
+ 						<input type="button" value="保存" id="submitForm">
+ 					</td>
+ 				</tr>
+ 			</table> 			
+ 		</form>
+ 	</div>
+</body>
+</html>

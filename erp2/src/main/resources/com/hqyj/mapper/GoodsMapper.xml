@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqyj.mapper.GoodsMapper">
+  <resultMap id="BaseResultMap" type="com.hqyj.pojo.Goods">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="ORIGIN" jdbcType="VARCHAR" property="origin" />
+    <result column="PRODUCER" jdbcType="VARCHAR" property="producer" />
+    <result column="UNIT" jdbcType="VARCHAR" property="unit" />
+    <result column="INPRICE" jdbcType="DOUBLE" property="inprice" />
+    <result column="OUTPRICE" jdbcType="DOUBLE" property="outprice" />
+    <result column="GOODSTYPEID" jdbcType="INTEGER" property="goodstypeid" />
+    
+    <association property="goodstype" javaType="com.hqyj.pojo.Goodstype" column="GOODSTYPEID" select="com.hqyj.mapper.GoodstypeMapper.selectByPrimaryKey"></association>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, NAME, ORIGIN, PRODUCER, UNIT, INPRICE, OUTPRICE, GOODSTYPEID
+  </sql>
+  <select id="selectByExample" parameterType="com.hqyj.pojo.GoodsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goods
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hqyj.pojo.GoodsExample">
+    delete from goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hqyj.pojo.Goods">
+    insert into goods (ID, NAME, ORIGIN, 
+      PRODUCER, UNIT, INPRICE, 
+      OUTPRICE, GOODSTYPEID)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR}, 
+      #{producer,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{inprice,jdbcType=DOUBLE}, 
+      #{outprice,jdbcType=DOUBLE}, #{goodstypeid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hqyj.pojo.Goods">
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="origin != null">
+        ORIGIN,
+      </if>
+      <if test="producer != null">
+        PRODUCER,
+      </if>
+      <if test="unit != null">
+        UNIT,
+      </if>
+      <if test="inprice != null">
+        INPRICE,
+      </if>
+      <if test="outprice != null">
+        OUTPRICE,
+      </if>
+      <if test="goodstypeid != null">
+        GOODSTYPEID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null">
+        #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="producer != null">
+        #{producer,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="inprice != null">
+        #{inprice,jdbcType=DOUBLE},
+      </if>
+      <if test="outprice != null">
+        #{outprice,jdbcType=DOUBLE},
+      </if>
+      <if test="goodstypeid != null">
+        #{goodstypeid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hqyj.pojo.GoodsExample" resultType="java.lang.Long">
+    select count(*) from goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update goods
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.origin != null">
+        ORIGIN = #{record.origin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.producer != null">
+        PRODUCER = #{record.producer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null">
+        UNIT = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inprice != null">
+        INPRICE = #{record.inprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.outprice != null">
+        OUTPRICE = #{record.outprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.goodstypeid != null">
+        GOODSTYPEID = #{record.goodstypeid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update goods
+    set ID = #{record.id,jdbcType=INTEGER},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      ORIGIN = #{record.origin,jdbcType=VARCHAR},
+      PRODUCER = #{record.producer,jdbcType=VARCHAR},
+      UNIT = #{record.unit,jdbcType=VARCHAR},
+      INPRICE = #{record.inprice,jdbcType=DOUBLE},
+      OUTPRICE = #{record.outprice,jdbcType=DOUBLE},
+      GOODSTYPEID = #{record.goodstypeid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hqyj.pojo.Goods">
+    update goods
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null">
+        ORIGIN = #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="producer != null">
+        PRODUCER = #{producer,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        UNIT = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="inprice != null">
+        INPRICE = #{inprice,jdbcType=DOUBLE},
+      </if>
+      <if test="outprice != null">
+        OUTPRICE = #{outprice,jdbcType=DOUBLE},
+      </if>
+      <if test="goodstypeid != null">
+        GOODSTYPEID = #{goodstypeid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hqyj.pojo.Goods">
+    update goods
+    set NAME = #{name,jdbcType=VARCHAR},
+      ORIGIN = #{origin,jdbcType=VARCHAR},
+      PRODUCER = #{producer,jdbcType=VARCHAR},
+      UNIT = #{unit,jdbcType=VARCHAR},
+      INPRICE = #{inprice,jdbcType=DOUBLE},
+      OUTPRICE = #{outprice,jdbcType=DOUBLE},
+      GOODSTYPEID = #{goodstypeid,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
